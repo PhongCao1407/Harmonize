@@ -42,14 +42,26 @@ const ComparisonPage = (props) => {
         let artistImage = trackData.album.images[0].url
         let img = document.getElementById('left-image')
         img.src = artistImage
-        
-
+    
     }
 
     const sendTrackDataRight = (trackData) => {
         let artistImage = trackData.album.images[0].url
         let img = document.getElementById('right-image')
         img.src = artistImage
+    }
+
+    const sendAlbumDataLeft = (albumData) => {
+        console.log(albumData)
+        let albumImage = albumData.images[0].url
+        let img = document.getElementById('left-image')
+        img.src = albumImage
+    }
+
+    const sendAlbumDataRight = (albumData) => {
+        let albumImage = albumData.images[0].url
+        let img = document.getElementById('right-image')
+        img.src = albumImage
     }
 
     useEffect(() => {
@@ -66,7 +78,8 @@ const ComparisonPage = (props) => {
                         searchTrack={props.searchTrack} 
                         getAudioFeatures={props.getAudioFeatures} sendAudioFeatures={sendTrackAudioLeft} 
                         getTrack={props.getTrack} sendTrackData={sendTrackDataLeft}
-                        searchAlbum={props.searchAlbum} getAlbum={props.getAlbum}/>
+                        searchAlbum={props.searchAlbum} getAlbum={props.getAlbum}
+                        sendAlbumData={sendAlbumDataLeft}/>
                 </div>
 
                 <div className='art-work'>
@@ -90,7 +103,8 @@ const ComparisonPage = (props) => {
                         searchTrack={props.searchTrack} 
                         getAudioFeatures={props.getAudioFeatures} sendAudioFeatures={sendTrackAudioRight} 
                         getTrack={props.getTrack} sendTrackData={sendTrackDataRight}
-                        searchAlbum={props.searchAlbum} getAlbum={props.getAlbum}/>
+                        searchAlbum={props.searchAlbum} getAlbum={props.getAlbum}
+                        sendAlbumData={sendAlbumDataRight}/>
 
                 </div>
 
@@ -110,7 +124,7 @@ const ComparisonPage = (props) => {
     const SongAttributes = () => {
         const Attribute = (props) => {
             return (
-                <div className='attribute'>
+                <div className={props.attribute + ' attribute'}>
                     <h3>{props.attributeName}</h3>
                 </div>
             )
@@ -119,18 +133,19 @@ const ComparisonPage = (props) => {
         return (
             <div className="song-attributes">
                 <img id = "wave" src={circle}/>
-                <Attribute attributeName="Acousticness" className="top-attribute"></Attribute>
-                <Attribute attributeName="Danceability"></Attribute>
-                <Attribute attributeName="Energy"></Attribute>
-                <Attribute attributeName="Intrumentalness"></Attribute>
-                <Attribute attributeName="Liveness"></Attribute>
-                <Attribute attributeName="Speechiness"></Attribute>
-                <Attribute attributeName="Valence"></Attribute>
+                <Attribute attributeName="Acousticness" attribute="acousticness"></Attribute>
+                <Attribute attributeName="Danceability" attribute="danceability"></Attribute>
+                <Attribute attributeName="Energy" attribute="energy"></Attribute>
+                <Attribute attributeName="Instrumentalness" attribute="instrumentalness"></Attribute>
+                <Attribute attributeName="Liveness" attribute="liveness"></Attribute>
+                <Attribute attributeName="Speechiness" attribute="speechiness"></Attribute>
+                <Attribute attributeName="Valence" attribute="valence"></Attribute>
 
             </div>
         )
     }
 
+    
     return (
         <div className="comparison-page">
             <main>

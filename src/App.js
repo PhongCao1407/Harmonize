@@ -84,7 +84,8 @@ function App() {
       if (!jsonResponse.albums) return [];
       return jsonResponse.albums.items.map(album => ({
           name: album.name,
-          artist: album.artists[0].name
+          artist: album.artists[0].name,
+          id: album.id
       }))
     }).then(searchResults => {
       return searchResults

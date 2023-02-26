@@ -19,6 +19,7 @@ function charterLeft(acousticness, danceability, energy, instrumentalness, liven
                 data: [acousticness, danceability, energy, instrumentalness, liveness, speechiness, valence], // attributes of object
                 borderColor: barcolor,
                 backgroundColor: barcolor,
+                borderRadius: 10,
                 borderWidth: 1
             }]
         },
@@ -81,6 +82,7 @@ function charterRight(acousticness, danceability, energy, instrumentalness, live
                 data: [acousticness, danceability, energy, instrumentalness, liveness, speechiness, valence], // attributes of object
                 borderColor: barcolor,
                 backgroundColor: barcolor,
+                borderRadius: 10,
                 borderWidth: 1
             }]
         },

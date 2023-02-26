@@ -92,16 +92,57 @@ main.search-bar-main {
     border-radius: 10px;
 }
 
-/* .attribute:hover {
+.attribute:hover::before {
     position: absolute;
-    content: attr(Hellosdfklnsdflksdnfl);
     display: inline-block;
-    left: 0px;
-    top: 0px;
+
     padding: 5px;
-    background-color: black;
-    color: white;
-} */
+    background-color: #D9D9D9;
+    color: black;
+    border-radius: 15px;
+}
+
+.acousticness:hover::before {
+    content: "Acousticness refers to the extent to which a musical recording features acoustic instruments or sounds, as opposed to electronic or synthesized ones. A song with high acousticness typically features instruments like guitars, pianos, drums, and other non-electronic instruments, and has a more organic and natural sound. Acousticness is often used as a descriptor in music streaming platforms to help listeners find music that aligns with their preferences for acoustic versus electronic instrumentation.";
+    width: 1300px;
+    height: 65;
+}
+
+.danceability:hover::before {
+    content: "Dancability refers to the quality of music that makes people want to dance or move rhythmically to its beat. A song's dancability can be influenced by various factors, such as its tempo, rhythm, groove, instrumentation, and overall energy. Generally, songs with faster tempos and strong, consistent beats tend to be more danceable, while slower and more mellow songs may be less so. Dancability is an important consideration for DJs, dance instructors, and musicians who want to create music that will get people up and moving.";
+    width: 1300px;
+    height: 65px;
+}
+
+.energy:hover::before {
+    content: 'Energy in music refers to the perceived intensity or power of a song. A song with high energy often has a fast tempo, strong and consistent beats, loud instrumentation, and an overall lively and dynamic feel. Energy is an important consideration for musicians, producers, and DJs who want to create a particular mood in their music, or who want to get people dancing and moving. Energy is also commonly used as a descriptor in music streaming platforms to help listeners find music with a particular level of intensity.';
+    width: 1300px;
+    height: 65;
+}
+
+.instrumentalness:hover::before {
+    content: 'Instrumentalness in music refers to the degree to which a recording contains instrumental sounds, without vocal elements such as singing or spoken word. A song with a high value consists primarily of non-vocal sounds, such as the sounds of instruments. Instrumentalness can be an important consideration for music analysis, as it can help distinguish between different genres and styles of music. It is also commonly used as a descriptor in music streaming platforms to help listeners find music with a particular level of vocal content.';
+    width: 1300px;
+    height: 65;
+}
+
+.liveness:hover::before {
+    content: 'Liveness is a term used to describe the extent to which a musical recording sounds like a live performance or a studio recording. A song with high liveness typically has a raw, unpolished sound with background noise, crowd noise, or other imperfections that are characteristic of a live performance. It is also commonly used as a descriptor in music streaming platforms to help listeners find music that has a particular level of live or studio sound.';
+    width: 1300px;
+    height: 65;
+}
+
+.speechiness:hover::before {
+    content: 'Speechiness in music refers to the extent to which a recording contains spoken words, such as singing or rapping, as opposed to instrumental music. A song with high speechiness features a significant amount of spoken words, while a song with low speechiness consists primarily of instrumental music with little or no vocals. Speechiness can help distinguish between different genres and styles of music. It is also commonly used as a descriptor in music streaming platforms to help listeners find music with a particular level of vocal content.';
+    width: 1300px;
+    height: 65;
+}
+
+.valence:hover::before {
+    content: "Valence is a term used in music to describe the mood-related qualities of a musical piece. It typically refers to the degree of positivity or negativity conveyed by a song, with positive or happy songs having high valence, and sad or melancholic songs having low valence. Valence can be influenced by various factors, such as the key, tempo, rhythm, melody, lyrics, and overall production style of the music. Valence is often used as a descriptor in music streaming platforms to help listeners find music that aligns with their mood or emotional state.";
+    width: 1300px;
+    height: 65;
+}
 
 .art-work {
     display: flex;
@@ -113,9 +154,9 @@ main.search-bar-main {
 }
 
 .art-work>.line {
-    border: 0.5px solid #000000;
+    border: 3px solid #000000;
     width: 100%;
-    border-radius: 90%;
+    /* border-radius: 90%; */
 }
 
 .art-work>img {
