@@ -68,6 +68,8 @@ const ComparisonPage = (props) => {
         const main = document.getElementsByTagName('main')[0]
 
         main.classList.add('search-bar-main')
+
+        
     })
 
     const ChartBoxLeft = (props) => {
