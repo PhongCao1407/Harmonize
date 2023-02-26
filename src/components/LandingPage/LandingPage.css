@@ -1,0 +1,66 @@
+html, body, #root, .App {
+    height: 100%;
+}
+
+.landing-page {
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 75px;
+    background-color: #58AC89;
+}
+
+header>h2 {
+    color: #ffffff;
+    font-size: 2.0em;
+    font-weight: 400;
+}
+
+.spotify-text {
+    font-weight: 700;
+}
+
+.landing-page>main {
+    background-image: url('./static/LandingPageBackground.png');
+
+    background-size: cover;
+
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    
+    align-items: center;
+
+    padding: 100px;
+
+    gap: 40px;
+}
+
+main>h1 {
+    font-size: 4.0em;
+}
+
+main>a>button {
+    border: none;
+    border-radius: 50px;
+    padding: 15px 20px;    
+
+    background-color: #000000;
+    color: #ffffff;
+
+    font-size: 30px;
+    font-weight: 600;
+}
+
+main>a>button:hover {
+    background-color: #3f3f3f;
+}

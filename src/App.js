@@ -1,19 +1,34 @@
 import './App.css';
 
-import Spotify from './util/Spotify';
+import { useEffect, useState } from 'react';
+
+import { LandingPage } from './components/LandingPage/LandingPage';
 import { SearchBar } from './components/SearchBar/SearchBar';
 
+
 function App() {
-  
+  const [token, setToken] = useState("")
 
-  const search = (searchTerm) => {
-    Spotify.search(searchTerm)
-    .then(searchResults => console.log(searchResults))
-  }
+  useEffect(() => {
+    const hash = window.location.hash
+    let token = window.localStorage.getItem("token")
 
+    if (!token && hash) {
+      token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
+
+      window.location.hash = ""
+      window.localStorage.setItem("token", token)
+    }
+
+    setToken(token)
+  }, [])
+
+ 
   return (
     <div className="App">
-        <SearchBar search={search}/>
+
+      <LandingPage/>
+      
     </div>
   );
 }
