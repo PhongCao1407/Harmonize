@@ -1,23 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
 
+import { useState } from 'react';
+
+import Spotify from './util/Spotify';
+
 function App() {
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const search = (searchTerm) => {
+    Spotify.search(searchTerm)
+    .then(searchResults => console.log(searchResults))
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form onSubmit={() => search(searchQuery)}>
+        <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}></input>
+        <input type="submit"/>
+        
+      </form>
     </div>
   );
 }
