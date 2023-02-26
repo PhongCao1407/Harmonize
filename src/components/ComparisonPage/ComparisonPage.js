@@ -1,11 +1,57 @@
 import './ComparisonPage.css'
 
-import { SearchBar } from '../SearchBar/SearchBar'
+import wave from './static/wave.png'
 
-import { useEffect } from 'react'
+import { SearchBar } from '../SearchBar/SearchBar'
+import { charterLeft, charterRight } from '../ChartPage/ChartPage'
+
+import { useEffect, useState } from 'react'
 
 
 const ComparisonPage = (props) => {
+    
+    
+    // Get data from child
+    const sendTrackAudioLeft = (trackData) => {
+        
+        let acousticness = trackData['acousticness']
+        let danceability = trackData['danceability']
+        let energy = trackData['energy']
+        let instrumentalness = trackData['instrumentalness']
+        let liveness = trackData['liveness']
+        let loudness = trackData['loudness']
+        let speechiness = trackData['speechiness']
+        let valence = trackData['valence']
+        charterLeft(acousticness, danceability, energy, instrumentalness, liveness, loudness, speechiness, valence, '#58AC89')
+        
+    }
+
+    const sendTrackAudioRight = (trackData) => {
+        let acousticness = trackData['acousticness']
+        let danceability = trackData['danceability']
+        let energy = trackData['energy']
+        let instrumentalness = trackData['instrumentalness']
+        let liveness = trackData['liveness']
+        let loudness = trackData['loudness']
+        let speechiness = trackData['speechiness']
+        let valence = trackData['valence']
+        charterRight(acousticness, danceability, energy, instrumentalness, liveness, loudness, speechiness, valence, '#58AC89')
+    }
+
+    const sendTrackDataLeft = (trackData) => {
+        let artistImage = trackData.album.images[0].url
+        let img = document.getElementById('left-image')
+        img.src = artistImage
+        
+
+    }
+
+    const sendTrackDataRight = (trackData) => {
+        let artistImage = trackData.album.images[0].url
+        let img = document.getElementById('right-image')
+        img.src = artistImage
+    }
+
     useEffect(() => {
         const main = document.getElementsByTagName('main')[0]
 
@@ -15,12 +61,26 @@ const ComparisonPage = (props) => {
     const ChartBoxLeft = (props) => {
         return (
             <div className="chart-box">
-                <SearchBar searchTrack={props.searchTrack} getAudioFeatures={props.getAudioFeatures} />
-                <select>
-                    <option>Albums</option>
-                    <option>Artists</option>
-                    <option>Tracks</option>
-                </select>
+                <div className='search-box'>
+                    <SearchBar searchTrack={props.searchTrack} 
+                        getAudioFeatures={props.getAudioFeatures} sendAudioFeatures={sendTrackAudioLeft} 
+                        getTrack={props.getTrack} sendTrackData={sendTrackDataLeft}/>
+                    <select>
+                        <option>Albums</option>
+                        <option>Artists</option>
+                        <option>Tracks</option>
+                    </select>
+                </div>
+
+                <div className='art-work'>
+                    <div className='line'></div>
+                    <img id="left-image" src=''></img> 
+                    <div className='line'></div>
+                </div>
+                <div className='canvas-container'>
+                    <canvas id='left-charts'></canvas>
+                </div>
+                
             </div>
         )
     }
@@ -28,13 +88,27 @@ const ComparisonPage = (props) => {
     const ChartBoxRight = (props) => {
         return (
             <div className="chart-box">
-                <select>
-                    <option>Albums</option>
-                    <option>Artists</option>
-                    <option>Tracks</option>
-                </select>
-                <SearchBar searchTrack={props.searchTrack} getAudioFeatures={props.getAudioFeatures} />
+                <div className="search-box">
+                    <select>
+                        <option>Albums</option>
+                        <option>Artists</option>
+                        <option>Tracks</option>
+                    </select>
+                    <SearchBar searchTrack={props.searchTrack} 
+                        getAudioFeatures={props.getAudioFeatures} sendAudioFeatures={sendTrackAudioRight} 
+                        getTrack={props.getTrack} sendTrackData={sendTrackDataRight}/>
 
+                </div>
+
+                <div className='art-work'>
+                    <div className='line'></div>
+                    <img id="right-image" src=''></img> 
+                    <div className='line'></div>
+                </div>
+
+                <div className="canvas-container">
+                    <canvas id='right-charts'></canvas>
+                </div>
             </div>
         )
     }
@@ -50,12 +124,12 @@ const ComparisonPage = (props) => {
 
         return (
             <div className="song-attributes">
+                <img src={wave}/>
                 <Attribute attributeName="Acousticness"></Attribute>
                 <Attribute attributeName="Danceability"></Attribute>
                 <Attribute attributeName="Energy"></Attribute>
                 <Attribute attributeName="Intrumentalness"></Attribute>
                 <Attribute attributeName="Liveness"></Attribute>
-                <Attribute attributeName="Loudness"></Attribute>
                 <Attribute attributeName="Speechiness"></Attribute>
                 <Attribute attributeName="Valence"></Attribute>
 
@@ -66,9 +140,9 @@ const ComparisonPage = (props) => {
     return (
         <div className="comparison-page">
             <main>
-                <ChartBoxLeft searchTrack={props.searchTrack} getAudioFeatures={props.getAudioFeatures}/>
+                <ChartBoxLeft searchTrack={props.searchTrack} getAudioFeatures={props.getAudioFeatures} getTrack={props.getTrack}/>
                 <SongAttributes />
-                <ChartBoxRight searchTrack={props.searchTrack} getAudioFeatures={props.getAudioFeatures}/>
+                <ChartBoxRight searchTrack={props.searchTrack} getAudioFeatures={props.getAudioFeatures} getTrack={props.getTrack}/>
             </main>
         </div>
     )

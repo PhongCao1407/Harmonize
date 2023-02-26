@@ -31,6 +31,7 @@ function App() {
       
       return response.json();
     }).then(jsonResponse => {
+      // console.log(jsonResponse.tracks)
       if (!jsonResponse.tracks) return [];
       return jsonResponse.tracks.items.map(track => ({
         id: track.id,
@@ -38,16 +39,29 @@ function App() {
         artist: track.artists[0].name,
         album: track.album.name,
         uri: track.uri,
-        popularity: track.popularity
+        popularity: track.popularity,
+        image: track.album.images[0]
       }))
     }).then(searchResults => {
       return searchResults
     });
   }
 
-  const getAudioFeatures = (songID) => {
+  const getAudioFeatures = (trackID) => {
 
-    return fetch(`https://api.spotify.com/v1/audio-features/${songID}`, {
+    return fetch(`https://api.spotify.com/v1/audio-features/${trackID}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    }).then(response => {
+      
+      return response.json();
+    }).then(jsonResponse => {
+      return jsonResponse
+    });
+  }
+
+  const getTrack = (trackID) => {
+
+    return fetch(`https://api.spotify.com/v1/tracks/${trackID}`, {
       headers: { Authorization: `Bearer ${token}` }
     }).then(response => {
       
@@ -84,7 +98,7 @@ function App() {
       </header>
       <Routes>
         <Route path='/' element={<LandingPage setToken={setToken}/>} />
-        <Route path='/ComparisonPage' element={<ComparisonPage searchTrack={searchTrack} getAudioFeatures={getAudioFeatures} />} />
+        <Route path='/ComparisonPage' element={<ComparisonPage searchTrack={searchTrack} getAudioFeatures={getAudioFeatures} getTrack={getTrack} />} />
       </Routes>
 
 

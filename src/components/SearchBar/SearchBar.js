@@ -2,7 +2,7 @@ import './SearchBar.css'
 
 import { useState } from "react";
 
-let songIDs = {}
+let trackIDs = {}
 
 const SearchBar = (props) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -10,19 +10,19 @@ const SearchBar = (props) => {
   const handleTermChange = (e) => {
 
     setSearchQuery(e.target.value)
-    props.searchTrack(searchQuery).then(songsList => {
-      console.log(songsList)
-      const datalist = document.getElementById('songs-list')
+    props.searchTrack(searchQuery).then(tracksList => {
+      console.log(tracksList)
+      const datalist = document.getElementById('tracks-list')
     
-      for (let i = 0; i < songsList.length; i++) {
+      for (let i = 0; i < tracksList.length; i++) {
         const newOption = document.createElement('option')
-        const song = songsList[i]
+        const track = tracksList[i]
 
-        let songNameAndID = song.name + ` (${song.artist})`
+        let trackNameAndID = track.name + ` (${track.artist})`
 
-        songIDs[songNameAndID] = song.id
+        trackIDs[trackNameAndID] = track.id
 
-        newOption.value = songNameAndID
+        newOption.value = trackNameAndID
 
         datalist.appendChild(newOption)
       }
@@ -32,24 +32,29 @@ const SearchBar = (props) => {
 
   const checkEnter = (e) => {
     if (e.keyCode === 13) {
-      let songNameRaw = searchQuery
-      let songID = songIDs[songNameRaw]
+      let trackNameRaw = searchQuery
+      let trackID = trackIDs[trackNameRaw]
     
-      console.log(songID)
-      props.getAudioFeatures(songID).then(features => {
+      console.log(trackID)
+      props.getAudioFeatures(trackID).then(features => {
         console.log(features)
+        props.sendAudioFeatures(features)
+      })
+      props.getTrack(trackID).then(data => {
+        console.log(data)
+        props.sendTrackData(data)
       })
     }
   }
 
   return (
     <div className="search-bar">
-      <datalist id="songs-list">
+      <datalist id="tracks-list">
         
       </datalist>
 
 
-      <input type="search" list="songs-list" placeholder="Lookup A Track, Album, or Artist"
+      <input type="search" list="tracks-list" placeholder="Lookup a Track, Album, or Artist"
         onChange={(e) => handleTermChange(e)}
         onKeyDown={(e) => checkEnter(e)} />
       
