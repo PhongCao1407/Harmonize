@@ -1,11 +1,10 @@
 import './App.css';
 
-import { useState } from 'react';
-
 import Spotify from './util/Spotify';
+import { SearchBar } from './components/SearchBar/SearchBar';
 
 function App() {
-  const [searchQuery, setSearchQuery] = useState("");
+  
 
   const search = (searchTerm) => {
     Spotify.search(searchTerm)
@@ -14,11 +13,7 @@ function App() {
 
   return (
     <div className="App">
-      <form onSubmit={() => search(searchQuery)}>
-        <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}></input>
-        <input type="submit"/>
-        
-      </form>
+        <SearchBar search={search}/>
     </div>
   );
 }
