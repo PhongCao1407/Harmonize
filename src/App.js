@@ -23,7 +23,7 @@ function App() {
     navigator('/ComparisonPage')
   }
 
-  const search = (searchTerm) => {
+  const searchTrack = (searchTerm) => {
 
     return fetch(`https://api.spotify.com/v1/search?type=track&q=${searchTerm}`, {
       headers: { Authorization: `Bearer ${token}` }
@@ -45,11 +45,22 @@ function App() {
     });
   }
 
+  const getAudioFeatures = (songID) => {
+
+    return fetch(`https://api.spotify.com/v1/audio-features/${songID}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    }).then(response => {
+      
+      return response.json();
+    }).then(jsonResponse => {
+      return jsonResponse
+    });
+  }
+
   useEffect(() => {
     const hash = window.location.hash
     let token = window.localStorage.getItem("token")
 
-    console.log(hash)
 
     if (!token && hash) {
       token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
@@ -73,7 +84,7 @@ function App() {
       </header>
       <Routes>
         <Route path='/' element={<LandingPage setToken={setToken}/>} />
-        <Route path='/ComparisonPage' element={<ComparisonPage search={search} />} />
+        <Route path='/ComparisonPage' element={<ComparisonPage searchTrack={searchTrack} getAudioFeatures={getAudioFeatures} />} />
       </Routes>
 
 

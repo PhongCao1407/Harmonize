@@ -36,6 +36,10 @@ main.search-bar-main {
     font-weight: 600;
 }
 
+.chart-box>select:hover {
+    background-color: #a0a0a0;
+}
+
 .song-attributes {
     display: flex;
     flex-direction: column;

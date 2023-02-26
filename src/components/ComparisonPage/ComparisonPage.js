@@ -15,7 +15,7 @@ const ComparisonPage = (props) => {
     const ChartBoxLeft = (props) => {
         return (
             <div className="chart-box">
-                <SearchBar search={props.search} />
+                <SearchBar searchTrack={props.searchTrack} getAudioFeatures={props.getAudioFeatures} />
                 <select>
                     <option>Albums</option>
                     <option>Artists</option>
@@ -33,7 +33,7 @@ const ComparisonPage = (props) => {
                     <option>Artists</option>
                     <option>Tracks</option>
                 </select>
-                <SearchBar search={props.search} />
+                <SearchBar searchTrack={props.searchTrack} getAudioFeatures={props.getAudioFeatures} />
 
             </div>
         )
@@ -66,9 +66,9 @@ const ComparisonPage = (props) => {
     return (
         <div className="comparison-page">
             <main>
-                <ChartBoxLeft search={props.search} />
+                <ChartBoxLeft searchTrack={props.searchTrack} getAudioFeatures={props.getAudioFeatures}/>
                 <SongAttributes />
-                <ChartBoxRight search={props.search} />
+                <ChartBoxRight searchTrack={props.searchTrack} getAudioFeatures={props.getAudioFeatures}/>
             </main>
         </div>
     )
