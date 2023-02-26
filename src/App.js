@@ -71,6 +71,39 @@ function App() {
     });
   }
 
+  const searchAlbum = (searchTerm) => {
+
+    return fetch(`https://api.spotify.com/v1/search?type=album&q=${searchTerm}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    }).then(response => {
+      
+      return response.json();
+    }).then(jsonResponse => {
+      console.log(jsonResponse)
+      console.log(jsonResponse.albums)
+      if (!jsonResponse.albums) return [];
+      return jsonResponse.albums.items.map(album => ({
+          name: album.name,
+          artist: album.artists[0].name
+      }))
+    }).then(searchResults => {
+      return searchResults
+    });
+  }
+
+
+  const getAlbum = (albumID) => {
+
+    return fetch(`https://api.spotify.com/v1/albums/${albumID}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    }).then(response => {
+      
+      return response.json();
+    }).then(jsonResponse => {
+      return jsonResponse
+    });
+  }
+
   useEffect(() => {
     const hash = window.location.hash
     let token = window.localStorage.getItem("token")
@@ -98,7 +131,10 @@ function App() {
       </header>
       <Routes>
         <Route path='/' element={<LandingPage setToken={setToken}/>} />
-        <Route path='/ComparisonPage' element={<ComparisonPage searchTrack={searchTrack} getAudioFeatures={getAudioFeatures} getTrack={getTrack} />} />
+        <Route path='/ComparisonPage' element={<ComparisonPage searchTrack={searchTrack} 
+        getAudioFeatures={getAudioFeatures} 
+        getTrack={getTrack}
+        searchAlbum={searchAlbum} getAlbum={getAlbum} />} />
       </Routes>
 
 

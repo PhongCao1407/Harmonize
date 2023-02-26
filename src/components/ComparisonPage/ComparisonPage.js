@@ -1,6 +1,6 @@
 import './ComparisonPage.css'
 
-import wave from './static/wave.png'
+import circle from './static/circle.png'
 
 import { SearchBar } from '../SearchBar/SearchBar'
 import { charterLeft, charterRight } from '../ChartPage/ChartPage'
@@ -62,14 +62,11 @@ const ComparisonPage = (props) => {
         return (
             <div className="chart-box">
                 <div className='search-box'>
-                    <SearchBar searchTrack={props.searchTrack} 
+                    <SearchBar direction="left"
+                        searchTrack={props.searchTrack} 
                         getAudioFeatures={props.getAudioFeatures} sendAudioFeatures={sendTrackAudioLeft} 
-                        getTrack={props.getTrack} sendTrackData={sendTrackDataLeft}/>
-                    <select>
-                        <option>Albums</option>
-                        <option>Artists</option>
-                        <option>Tracks</option>
-                    </select>
+                        getTrack={props.getTrack} sendTrackData={sendTrackDataLeft}
+                        searchAlbum={props.searchAlbum} getAlbum={props.getAlbum}/>
                 </div>
 
                 <div className='art-work'>
@@ -89,14 +86,11 @@ const ComparisonPage = (props) => {
         return (
             <div className="chart-box">
                 <div className="search-box">
-                    <select>
-                        <option>Albums</option>
-                        <option>Artists</option>
-                        <option>Tracks</option>
-                    </select>
-                    <SearchBar searchTrack={props.searchTrack} 
+                    <SearchBar direction="right"
+                        searchTrack={props.searchTrack} 
                         getAudioFeatures={props.getAudioFeatures} sendAudioFeatures={sendTrackAudioRight} 
-                        getTrack={props.getTrack} sendTrackData={sendTrackDataRight}/>
+                        getTrack={props.getTrack} sendTrackData={sendTrackDataRight}
+                        searchAlbum={props.searchAlbum} getAlbum={props.getAlbum}/>
 
                 </div>
 
@@ -124,8 +118,8 @@ const ComparisonPage = (props) => {
 
         return (
             <div className="song-attributes">
-                <img src={wave}/>
-                <Attribute attributeName="Acousticness"></Attribute>
+                <img id = "wave" src={circle}/>
+                <Attribute attributeName="Acousticness" className="top-attribute"></Attribute>
                 <Attribute attributeName="Danceability"></Attribute>
                 <Attribute attributeName="Energy"></Attribute>
                 <Attribute attributeName="Intrumentalness"></Attribute>
@@ -140,9 +134,17 @@ const ComparisonPage = (props) => {
     return (
         <div className="comparison-page">
             <main>
-                <ChartBoxLeft searchTrack={props.searchTrack} getAudioFeatures={props.getAudioFeatures} getTrack={props.getTrack}/>
+                <ChartBoxLeft searchTrack={props.searchTrack} 
+                getAudioFeatures={props.getAudioFeatures} 
+                getTrack={props.getTrack}
+                searchAlbum={props.searchAlbum}
+                getAlbum={props.getAlbum}/>
                 <SongAttributes />
-                <ChartBoxRight searchTrack={props.searchTrack} getAudioFeatures={props.getAudioFeatures} getTrack={props.getTrack}/>
+                <ChartBoxRight searchTrack={props.searchTrack} 
+                getAudioFeatures={props.getAudioFeatures} 
+                getTrack={props.getTrack}
+                searchAlbum={props.searchAlbum}
+                getAlbum={props.getAlbum}/>
             </main>
         </div>
     )

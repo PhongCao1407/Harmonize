@@ -15,7 +15,7 @@ main.search-bar-main {
 
     background-color: #ffffff;
 
-    padding: 30px 40px 20px 40px;
+    padding: 0px 40px 20px 40px;
 
     border-radius: 25px;
 
@@ -27,30 +27,12 @@ main.search-bar-main {
     flex-direction: column;
 
     gap: 20px;
+    padding-top: 20px;
     
 }
 
-.chart-box>.search-box {
-    display: flex;
-    flex-direction: row;
-
-    gap: 15px;
-}
-
-.chart-box>.search-box>select {
-    height: 40px;
-    width: 120px;
-    background-color: #D9D9D9;
-    border: none;
-    border-radius: 5px;
-
-    padding: 0 10px;
-
-    font-weight: 600;
-}
-
-.chart-box>.search-box>select:hover {
-    background-color: #a0a0a0;
+.search-box {
+    padding: 10px;
 }
 
 #charts {
@@ -63,9 +45,38 @@ main.search-bar-main {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    padding-top: 38px;
+    padding-top: 55px;
 }
 
+.song-attributes>.top-attribute {
+    padding-top: 40px;
+}
+
+/* .song-attributes>img {
+    padding-bottom: 25px;
+    padding-left: 10px;
+} */
+
+
+.song-attributes>#wave{
+    -webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 4s linear infinite;
+    /* z-index: 0; */
+}
+
+@-moz-keyframes spin { 
+    100% { -moz-transform: rotate(360deg); } 
+}
+@-webkit-keyframes spin { 
+    100% { -webkit-transform: rotate(360deg); } 
+}
+@keyframes spin { 
+    100% { 
+        -webkit-transform: rotate(360deg); 
+        transform:rotate(360deg); 
+    } 
+}
 .attribute {
     background-color: #D9D9D9;
     height: 57px;
