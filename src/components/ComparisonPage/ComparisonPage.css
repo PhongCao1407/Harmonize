@@ -97,9 +97,10 @@ main.search-bar-main {
     display: inline-block;
 
     padding: 5px;
-    background-color: #c0ead7;
-    color: black;
+    border: 2px solid #7FD3B0;
+    background-color: #def5eb;
     border-radius: 15px;
+    gap: 10px;
 }
 
 .acousticness:hover::before {
