@@ -31,11 +31,12 @@ function charterLeft(acousticness, danceability, energy, instrumentalness, liven
                 legend: {
                     display: false,
                     position: 'right'
-                },
-                tooltip: {
-                    enabled: false
-                    
                 }
+
+                // tooltip: {
+                //     enabled: false
+                    
+                // }
             },
             scales: {
                 x: {
@@ -46,13 +47,13 @@ function charterLeft(acousticness, danceability, energy, instrumentalness, liven
                     display: false,
                     grid: {
                         display: false
-                    },
+                    }
                     
                 },
                 y: {
                     //max: 1,
                     //min: 0,
-                    
+                    display: false,
                     beginAtZero: true,
                     grid: {
                         display: false,
@@ -112,7 +113,7 @@ function charterRight(acousticness, danceability, energy, instrumentalness, live
                 },
                 y: {
                     //max: 1,
-                    //min: 0,
+                    display: false,
                     beginAtZero: true,
                     grid: {
                         display: false,
