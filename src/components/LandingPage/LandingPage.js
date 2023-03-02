@@ -8,11 +8,7 @@ const LandingPage = (props) => {
             <main>
                 <h1>WELCOME</h1>
                 <a >
-                    <button onClick={() => {
-                        const token = Spotify.getAccessToken()
-                        props.setToken(token)
-                    }
-                    }>
+                    <button onClick={() => props.onClick()}>
                         Sign In to Compare
                     </button>
                 </a>

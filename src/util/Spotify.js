@@ -8,6 +8,7 @@ const AUTH_URL = AUTH_ENDPOINT +
     `response_type=${RESPONSE_TYPE}&` +
     `redirect_uri=${REDIRECT_URI}`;
 
+
 const Spotify = {
     getAccessToken() {
         if (accessToken) return accessToken;
@@ -22,7 +23,76 @@ const Spotify = {
         } else {
             window.location = AUTH_URL;
         }
-    },
+    }, searchTrack(searchTerm) {
+        accessToken = Spotify.getAccessToken()
+        return fetch(`https://api.spotify.com/v1/search?type=track&q=${searchTerm}`, {
+          headers: { Authorization: `Bearer ${accessToken}` }
+        }).then(response => {
+          
+          return response.json();
+        }).then(jsonResponse => {
+          
+          if (!jsonResponse.tracks) return [];
+          return jsonResponse.tracks.items.map(track => ({
+            id: track.id,
+            name: track.name,
+            artist: track.artists[0].name,
+            album: track.album.name,
+            uri: track.uri,
+            popularity: track.popularity,
+            image: track.album.images[0]
+          }))
+        }).then(searchResults => {
+          return searchResults
+        });
+      }, getAudioFeatures(trackID) {
+        accessToken = Spotify.getAccessToken()
+        return fetch(`https://api.spotify.com/v1/audio-features/${trackID}`, {
+          headers: { Authorization: `Bearer ${accessToken}` }
+        }).then(response => {
+          
+          return response.json();
+        }).then(jsonResponse => {
+          return jsonResponse
+        });
+      }, getTrack(trackID) {
+        accessToken = Spotify.getAccessToken()
+        return fetch(`https://api.spotify.com/v1/tracks/${trackID}`, {
+          headers: { Authorization: `Bearer ${accessToken}` }
+        }).then(response => {
+          
+          return response.json();
+        }).then(jsonResponse => {
+          return jsonResponse
+        });
+      }, searchAlbum(searchTerm) {
+        accessToken = Spotify.getAccessToken()
+        return fetch(`https://api.spotify.com/v1/search?type=album&q=${searchTerm}`, {
+          headers: { Authorization: `Bearer ${accessToken}` }
+        }).then(response => {
+          
+          return response.json();
+        }).then(jsonResponse => {
+          if (!jsonResponse.albums) return [];
+          return jsonResponse.albums.items.map(album => ({
+              name: album.name,
+              artist: album.artists[0].name,
+              id: album.id
+          }))
+        }).then(searchResults => {
+          return searchResults
+        });
+      }, getAlbum(albumID) {
+        accessToken = Spotify.getAccessToken()
+        return fetch(`https://api.spotify.com/v1/albums/${albumID}`, {
+          headers: { Authorization: `Bearer ${accessToken}` }
+        }).then(response => {
+          
+          return response.json();
+        }).then(jsonResponse => {
+          return jsonResponse
+        });
+      }
     
 };
 

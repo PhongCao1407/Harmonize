@@ -2,334 +2,175 @@ import './SearchBar.css'
 
 import { useState } from "react";
 
+import Spotify from '../../util/Spotify';
+
+const NUMBER_OF_OPTIONS = 5
+
 let trackIDs = {}
 let albumIDs = {}
 
 const SearchBar = (props) => {
-  console.log(props)
   let searchQuery = ''
   let categoryLeft = 'Tracks'
   let categoryRight = 'Tracks'
 
-  const handleLeftTermChange = (e) => {
-    // console.log(e.target.value)
-
+  const handleTermChange = (e, side) => {
     searchQuery = e.target.value
 
-    // console.log(searchQuery)
+    if ((side === 'left' && categoryLeft === 'Tracks') || (side === 'right' && categoryRight === 'Tracks')) {
+      Spotify.searchTrack(searchQuery).then(tracksList => {
+        
 
-
-    if (categoryLeft === 'Tracks') {
-      props.searchTrack(searchQuery).then(tracksList => {
-        console.log(tracksList)
-        const datalist = document.getElementById('tracks-list')
-
-        for (let i = 0; i < tracksList.length; i++) {
-          const newOption = document.createElement('option')
+        for (let i = 0; i < NUMBER_OF_OPTIONS; i++) {
+          const option = document.getElementById(`option-${i+1}`)
           const track = tracksList[i]
 
           let trackNameAndID = track.name + ` (${track.artist})`
 
           trackIDs[trackNameAndID] = track.id
 
-          newOption.value = trackNameAndID
+          option.value = trackNameAndID
 
-          datalist.appendChild(newOption)
         }
       })
-    } else if (categoryLeft === 'Albums') {
-      props.searchAlbum(searchQuery).then(albumsList => {
-        // console.log(albumsList)
-        const datalist = document.getElementById('tracks-list')
+    } else if ((side === 'left' && categoryLeft === 'Albums') || (side === 'right' && categoryRight === 'Albums')) {
+      Spotify.searchAlbum(searchQuery).then(albumsList => {
 
-        for (let i = 0; i < albumsList.length; i++) {
-          const newOption = document.createElement('option')
+        for (let i = 0; i < NUMBER_OF_OPTIONS; i++) {
+          const option = document.getElementById(`option-${i+1}`)
           const album = albumsList[i]
 
           let albumNameAndID = album.name + ` (${album.artist})`
 
           albumIDs[albumNameAndID] = album.id
 
-          newOption.value = albumNameAndID
-
-          datalist.appendChild(newOption)
+          option.value = albumNameAndID          
         }
       })
     }
 
-
   }
 
-  const handleRightTermChange = (e) => {
-    // console.log(e.target.value)
+  const handleCategoryChange = (side) => {
+    let newCategory = document.getElementById(`select-id-${side}`).value
 
-    searchQuery = e.target.value
-
-    // console.log(searchQuery)
-
-
-    if (categoryRight === 'Tracks') {
-      props.searchTrack(searchQuery).then(tracksList => {
-        console.log(tracksList)
-        const datalist = document.getElementById('tracks-list')
-
-        for (let i = 0; i < tracksList.length; i++) {
-          const newOption = document.createElement('option')
-          const track = tracksList[i]
-
-          let trackNameAndID = track.name + ` (${track.artist})`
-
-          trackIDs[trackNameAndID] = track.id
-
-          newOption.value = trackNameAndID
-
-          datalist.appendChild(newOption)
-        }
-      })
-    } else if (categoryRight === 'Albums') {
-      props.searchAlbum(searchQuery).then(albumsList => {
-        // console.log(albumsList)
-        const datalist = document.getElementById('tracks-list')
-
-        for (let i = 0; i < albumsList.length; i++) {
-          const newOption = document.createElement('option')
-          const album = albumsList[i]
-
-          let albumNameAndID = album.name + ` (${album.artist})`
-
-          albumIDs[albumNameAndID] = album.id
-
-          newOption.value = albumNameAndID
-
-          datalist.appendChild(newOption)
-        }
-      })
+    if (side === 'left') {
+      categoryLeft = newCategory
+    } else {
+      categoryRight = newCategory
     }
-
-
+  
   }
 
-  const handleLeftCategoryChange = () => {
-    let newCategory = document.getElementById("select-id-left").value
-    categoryLeft = newCategory
-
-  }
-
-  const handleRightCategoryChange = () => {
-    let newCategory = document.getElementById("select-id-right").value
-
-    categoryRight = newCategory
-    console.log(categoryRight)
-  }
-
-  const checkLeftEnter = (e) => {
+  const checkEnter = (e, side) => {
     if (e.keyCode === 13) {
-      if (categoryLeft === 'Tracks') {
+
+      if ((side === 'left' && categoryLeft === 'Tracks') || (side === 'right' && categoryRight === 'Tracks')) {
         let trackNameRaw = searchQuery
         let trackID = trackIDs[trackNameRaw]
 
-        // console.log(trackID)
-        props.getAudioFeatures(trackID).then(features => {
-          // console.log(features)
-          props.sendAudioFeatures(features)
+        Spotify.getAudioFeatures(trackID).then(features => {
+          props.sendAudioFeatures(features, side)
         })
-        props.getTrack(trackID).then(data => {
-          console.log(data)
-          props.sendTrackData(data)
+        Spotify.getTrack(trackID).then(data => {
+          props.sendTrackData(data, side)
         })
-      } else if (categoryLeft === 'Albums') {
-        // console.log(searchQuery)
-        // console.log(albumIDs)
+      } else if ((side === 'left' && categoryLeft === 'Albums') || (side === 'right' && categoryRight === 'Albums')) {
         let albumID = albumIDs[searchQuery]
-        console.log(albumID)
-        props.getAlbum(albumID).then(data => {
-          // console.log(data.tracks.items)
-
-          props.sendAlbumData(data)
-
-          const getTrackFeaturesSum = async () => {
-            let acousticness = 0;
-            let danceability = 0;
-            let energy = 0;
-            let instrumentalness = 0;
-            let liveness = 0;
-            let loudness = 0;
-            let speechiness = 0;
-            let valence = 0;
-
-            var promiseArray = [];
-
-            for (let i = 0; i < data.tracks.items.length; i++) {
-              promiseArray.push(props.getAudioFeatures(data.tracks.items[i].id).then(attributes => {
-                acousticness += attributes['acousticness']
-                danceability += attributes['danceability']
-                energy += attributes['energy']
-                instrumentalness += attributes['instrumentalness']
-                liveness += attributes['liveness']
-                loudness += attributes['loudness']
-                speechiness += attributes['speechiness']
-                valence += attributes['valence']
-              }))
-            }
-
-            Promise.all(promiseArray).then(() => {
-              acousticness = acousticness / data.tracks.items.length
-              danceability = danceability / data.tracks.items.length
-              energy = energy / data.tracks.items.length
-              instrumentalness = instrumentalness / data.tracks.items.length
-              liveness = liveness / data.tracks.items.length
-              loudness = loudness / data.tracks.items.length
-              speechiness = speechiness / data.tracks.items.length
-              valence = valence / data.tracks.items.length
-
-              let features = {
-                acousticness: acousticness,
-                danceability: danceability,
-                energy: energy,
-                instrumentalness: instrumentalness,
-                liveness: liveness,
-                loudness: loudness,
-                speechiness: speechiness,
-                valence: valence
-              }
-
-              console.log(features)
-
-              props.sendAudioFeatures(features)
-            })
-
-          }
-
-          getTrackFeaturesSum()
-
-        })
-      }
-
-
-
-    }
-  }
-
-  const checkRightEnter = (e) => {
-    if (e.keyCode === 13) {
-      if (categoryRight === 'Tracks') {
-        let trackNameRaw = searchQuery
-        let trackID = trackIDs[trackNameRaw]
-
-        // console.log(trackID)
-        props.getAudioFeatures(trackID).then(features => {
-          // console.log(features)
-          props.sendAudioFeatures(features)
-        })
-        props.getTrack(trackID).then(data => {
-          console.log(data)
-          props.sendTrackData(data)
-        })
-      } else if (categoryRight === 'Albums') {
-        // console.log(searchQuery)
-        // console.log(albumIDs)
-        let albumID = albumIDs[searchQuery]
-        console.log(albumID)
-        props.getAlbum(albumID).then(data => {
-          // console.log(data.tracks.items)
-
-          props.sendAlbumData(data)
-
-          const getTrackFeaturesSum = async () => {
-            let acousticness = 0;
-            let danceability = 0;
-            let energy = 0;
-            let instrumentalness = 0;
-            let liveness = 0;
-            let loudness = 0;
-            let speechiness = 0;
-            let valence = 0;
-
-            var promiseArray = [];
-
-            for (let i = 0; i < data.tracks.items.length; i++) {
-              promiseArray.push(props.getAudioFeatures(data.tracks.items[i].id).then(attributes => {
-                acousticness += attributes['acousticness']
-                danceability += attributes['danceability']
-                energy += attributes['energy']
-                instrumentalness += attributes['instrumentalness']
-                liveness += attributes['liveness']
-                loudness += attributes['loudness']
-                speechiness += attributes['speechiness']
-                valence += attributes['valence']
-              }))
-            }
-
-            Promise.all(promiseArray).then(() => {
-              acousticness = acousticness / data.tracks.items.length
-              danceability = danceability / data.tracks.items.length
-              energy = energy / data.tracks.items.length
-              instrumentalness = instrumentalness / data.tracks.items.length
-              liveness = liveness / data.tracks.items.length
-              loudness = loudness / data.tracks.items.length
-              speechiness = speechiness / data.tracks.items.length
-              valence = valence / data.tracks.items.length
-
-              let features = {
-                acousticness: acousticness,
-                danceability: danceability,
-                energy: energy,
-                instrumentalness: instrumentalness,
-                liveness: liveness,
-                loudness: loudness,
-                speechiness: speechiness,
-                valence: valence
-              }
-
-              console.log(features)
-
-              props.sendAudioFeatures(features)
-            })
-
-          }
-
-          getTrackFeaturesSum()
-
-        })
-      }
-
-
-
-    }
-  }
-
-  if (props.direction === "left") {
-    return (
-      <div className="search-bar">
-
-        <datalist id="tracks-list">
-        </datalist>
-        <input type="search" list="tracks-list" placeholder="Lookup a Track, Album, or Artist"
-          onChange={(e) => handleLeftTermChange(e)}
-          onKeyDown={(e) => checkLeftEnter(e)} />
-        <select onChange={() => handleLeftCategoryChange()} id="select-id-left">
-          <option value="Tracks">Tracks</option>
-          <option value="Albums">Albums</option>
+        
+        Spotify.getAlbum(albumID).then(data => {
           
-        </select>
+          props.sendAlbumData(data, side)
 
-      </div>
-    )
-  } else {
-    return (<div className="search-bar">
-      <select onChange={() => handleRightCategoryChange()} id="select-id-right">
+          const getTrackFeaturesSum = async () => {
+            let acousticness = 0;
+            let danceability = 0;
+            let energy = 0;
+            let instrumentalness = 0;
+            let liveness = 0;
+            let loudness = 0;
+            let speechiness = 0;
+            let valence = 0;
+
+            var promiseArray = [];
+
+            for (let i = 0; i < data.tracks.items.length; i++) {
+              promiseArray.push(Spotify.getAudioFeatures(data.tracks.items[i].id).then(attributes => {
+                acousticness += attributes['acousticness']
+                danceability += attributes['danceability']
+                energy += attributes['energy']
+                instrumentalness += attributes['instrumentalness']
+                liveness += attributes['liveness']
+                loudness += attributes['loudness']
+                speechiness += attributes['speechiness']
+                valence += attributes['valence']
+              }))
+            }
+
+            Promise.all(promiseArray).then(() => {
+              acousticness = acousticness / data.tracks.items.length
+              danceability = danceability / data.tracks.items.length
+              energy = energy / data.tracks.items.length
+              instrumentalness = instrumentalness / data.tracks.items.length
+              liveness = liveness / data.tracks.items.length
+              loudness = loudness / data.tracks.items.length
+              speechiness = speechiness / data.tracks.items.length
+              valence = valence / data.tracks.items.length
+
+              let features = {
+                acousticness: acousticness,
+                danceability: danceability,
+                energy: energy,
+                instrumentalness: instrumentalness,
+                liveness: liveness,
+                loudness: loudness,
+                speechiness: speechiness,
+                valence: valence
+              }
+              props.sendAudioFeatures(features, side)
+            })
+
+          }
+          getTrackFeaturesSum()
+        })
+      }
+
+      //Clear search bar suggestions
+      
+      for (let i = 0; i < NUMBER_OF_OPTIONS; i++) {
+        const option = document.getElementById(`option-${i+1}`)
+
+        option.value = ''
+      }
+
+      e.preventDefault() //Make sure on term change is not called
+      
+    }
+  }
+
+
+  return (
+    <div className="search-bar">
+
+      <datalist id="tracks-list">
+        <option id='option-1'></option>
+        <option id='option-2'></option>
+        <option id='option-3'></option>
+        <option id='option-4'></option>
+        <option id='option-5'></option>
+      </datalist>
+      <input type="search" list="tracks-list" placeholder="Lookup a Track, Album, or Artist"
+        onChange={(e) => handleTermChange(e, props.direction)}
+        onKeyDown={(e) => checkEnter(e, props.direction)} />
+      <select onChange={() => handleCategoryChange(props.direction)} id={`select-id-${props.direction}`}>
         <option value="Tracks">Tracks</option>
         <option value="Albums">Albums</option>
         
       </select>
-      <datalist id="tracks-list">
-      </datalist>
-      <input type="search" list="tracks-list" placeholder="Lookup a Track, Album, or Artist"
-        onChange={(e) => handleRightTermChange(e)}
-        onKeyDown={(e) => checkRightEnter(e)} />
 
-    </div>)
-  }
+    </div>
+  )
+  
 
 }
 
