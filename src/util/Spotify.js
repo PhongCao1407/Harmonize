@@ -92,6 +92,33 @@ const Spotify = {
         }).then(jsonResponse => {
           return jsonResponse
         });
+      }, searchArtist(searchTerm) {
+        accessToken = Spotifyt.getAccessToken()
+        return fetch(`https://api.spotify.com/v1/search?type=artist&q=${searchTerm}`, {
+          headers: {Authorization: `Bearer ${accessToken}`}
+        }).then(response => {
+
+          return response.json();
+        }).then(jsonResponse => {
+          if (!jsonResponse.artist) return [];
+          return jsonResponse.artist.items.map(artist => ({
+            name: artist.name,
+            id: artist.id
+            // toptracks?
+          }))
+        }).then(searchResults => {
+          return searchResults
+        });
+      }, getArtist(artistID) {
+        accessToken = Spotify.getAccessToken()
+        return fetch(`https://api.spotify.com/v1/albums/${artistID}`, {
+          headers: {Authorization: `Bearer ${accessToken}` }
+        }).then(response => {
+
+          return response.json();
+        }).then(jsonResponse => {
+          return jsonResponse
+        });
       }
     
 };
