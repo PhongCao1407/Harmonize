@@ -37,11 +37,16 @@ const ComparisonPage = (props) => {
     
     }
 
-
     const sendAlbumData = (albumData, side) => {
         let albumImage = albumData.images[0].url
         let img = document.getElementById(`${side}-image`)
         img.src = albumImage
+    }
+
+    const sendArtistData = (artistData, side) => {
+        let artistImage = artistData.images[0].url
+        let img = document.getElementById(`${side}-image`)
+        img.src = artistImage
     }
 
 
@@ -59,7 +64,8 @@ const ComparisonPage = (props) => {
                     <SearchBar direction="left"
                         sendAudioFeatures={sendTrackAudio} 
                         sendTrackData={sendTrackData}
-                        sendAlbumData={sendAlbumData}/>
+                        sendAlbumData={sendAlbumData}
+                        sendArtistData={sendArtistData}/>
                 </div>
 
                 <div className='art-work'>
@@ -82,7 +88,8 @@ const ComparisonPage = (props) => {
                     <SearchBar direction="right"
                         sendAudioFeatures={sendTrackAudio} 
                         sendTrackData={sendTrackData}
-                        sendAlbumData={sendAlbumData}/>
+                        sendAlbumData={sendAlbumData}
+                        sendArtistData={sendArtistData}/>
 
                 </div>
 
