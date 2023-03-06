@@ -27,22 +27,21 @@ function charterLeft(acousticness, danceability, energy, instrumentalness, liven
             responsive: true,
             maintainAspectRatio: false,
             indexAxis: 'y',
+            
             plugins: {
                 legend: {
                     display: false,
                     position: 'right'
-                }
-
-                // tooltip: {
-                //     enabled: false
+                },
+                tooltip: {
                     
-                // }
+                }
             },
             scales: {
                 x: {
                     
-                    max: 1,
-                    min: 0,
+                    max: 0,
+                    min: -1,
                     beginAtZero: true,
                     display: false,
                     grid: {
@@ -97,9 +96,9 @@ function charterRight(acousticness, danceability, energy, instrumentalness, live
                     position: 'right'
                 },
                 //removes the tooltip
-                tooltip: {
-                    enabled: false
-                }
+                // tooltip: {
+                //     enabled: false
+                // }
             },
             scales: {
                 x: {

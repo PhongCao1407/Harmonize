@@ -23,7 +23,7 @@ const ComparisonPage = (props) => {
         let speechiness = trackData['speechiness']
         let valence = trackData['valence']
         if (side === 'left') {
-            charterLeft(acousticness, danceability, energy, instrumentalness, liveness, loudness, speechiness, valence, '#58AC89')
+            charterLeft(-acousticness, -danceability, -energy, -instrumentalness, -liveness, -loudness, -speechiness, -valence, '#58AC89')
         } else {
             charterRight(acousticness, danceability, energy, instrumentalness, liveness, loudness, speechiness, valence, '#58AC89')
         }

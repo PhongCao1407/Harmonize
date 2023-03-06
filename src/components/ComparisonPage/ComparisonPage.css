@@ -174,7 +174,7 @@ main.search-bar-main {
 
 #left-charts {
     /* height: 500px; */
-    transform: scaleX(-1);
+    /* transform: scaleX(-1); */
 }
 
 canvas {
