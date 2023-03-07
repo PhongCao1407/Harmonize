@@ -1,4 +1,4 @@
-# SpotifyComparer Application Read Me
+# SpotifyComparer Application
 Overview
 
 SpotifyComparer is a web application that allows users to compare their favorite songs and albums from Spotify. The application fetches data from the Spotify Web API and visualizes it using the Chart.js library.
