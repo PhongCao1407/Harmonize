@@ -47,8 +47,8 @@ function App() {
       </header>
 
       <Routes>
-        <Route path='/' element={<LandingPage onClick={navigateComparisonPage}/>} />
-        <Route path='/ComparisonPage' element={<ComparisonPage/>} />
+        <Route path='/SpotifyComparer' element={<LandingPage onClick={navigateComparisonPage}/>} />
+        <Route path='/SpotifyComparer/ComparisonPage' element={<ComparisonPage/>} />
       </Routes>
 
 
