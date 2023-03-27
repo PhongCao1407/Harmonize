@@ -17,16 +17,16 @@ function App() {
   const navigator = useNavigate()
 
   const navigateLandingPage = () => {
-    navigator('/');
+    navigator('/SpotifyComparer');
   }
 
   const navigateComparisonPage = () => {
     if (token !== "") {
-      navigator('/ComparisonPage')
+      navigator('/SpotifyComparer/ComparisonPage')
     } else {
       let newToken = Spotify.getAccessToken().then
       setToken(newToken)
-      navigator('/ComparisonPage')
+      navigator('/SpotifyComparer/ComparisonPage')
     }
   }
 
