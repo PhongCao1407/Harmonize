@@ -1,6 +1,6 @@
 let accessToken;
 const CLIENT_ID = "b7d5be16082f4e71853b935b420e72d7"
-const REDIRECT_URI = "https://phongcao1407.github.io/SpotifyComparer/"
+const REDIRECT_URI = "https://phongcao1407.github.io/SpotifyComparer"
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize?"
 const RESPONSE_TYPE = "token"
 const AUTH_URL = AUTH_ENDPOINT +
