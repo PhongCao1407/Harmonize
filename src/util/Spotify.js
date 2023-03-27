@@ -1,5 +1,5 @@
-import { CLIENT_ID } from './clientID'
 let accessToken;
+const CLIENT_ID = "b7d5be16082f4e71853b935b420e72d7"
 const REDIRECT_URI = "http://localhost:3000"
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize?"
 const RESPONSE_TYPE = "token"
