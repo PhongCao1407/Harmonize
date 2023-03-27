@@ -47,7 +47,7 @@ function App() {
       </header>
 
       <Routes>
-        <Route path='/LandingPage' element={<LandingPage onClick={navigateComparisonPage}/>} />
+        <Route path='/' element={<LandingPage onClick={navigateComparisonPage}/>} />
         <Route path='/ComparisonPage' element={<ComparisonPage/>} />
       </Routes>
 
