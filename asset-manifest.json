@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/SpotifyComparer/static/css/main.54833e64.css",
-    "main.js": "/SpotifyComparer/static/js/main.7a095707.js",
+    "main.js": "/SpotifyComparer/static/js/main.5ac8b74f.js",
     "static/media/LandingPageBackground.png": "/SpotifyComparer/static/media/LandingPageBackground.d49c7a7e30f98b7f335a.png",
     "index.html": "/SpotifyComparer/index.html",
     "main.54833e64.css.map": "/SpotifyComparer/static/css/main.54833e64.css.map",
-    "main.7a095707.js.map": "/SpotifyComparer/static/js/main.7a095707.js.map"
+    "main.5ac8b74f.js.map": "/SpotifyComparer/static/js/main.5ac8b74f.js.map"
   },
   "entrypoints": [
     "static/css/main.54833e64.css",
-    "static/js/main.7a095707.js"
+    "static/js/main.5ac8b74f.js"
   ]
 }
