@@ -9,7 +9,6 @@ import Spotify from './util/Spotify';
 import { LandingPage } from './components/LandingPage/LandingPage';
 import { ComparisonPage } from './components/ComparisonPage/ComparisonPage';
 
-let accessTokenMatch = window.location.href.match(/access_token=([^&]*)/);
 
 function App() {
   const [token, setToken] = useState("")
@@ -48,6 +47,7 @@ function App() {
 
       <Routes>
         <Route path='/SpotifyComparer' element={<LandingPage onClick={navigateComparisonPage}/>} />
+        <Route path="/" element={<Navigate replace to="/SpotifyComparer" />} />
         <Route path='/SpotifyComparer/ComparisonPage' element={<ComparisonPage/>} />
       </Routes>
 
