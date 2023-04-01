@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/SpotifyComparer/static/css/main.54833e64.css",
-    "main.js": "/SpotifyComparer/static/js/main.d3ddb4d0.js",
-    "static/media/LandingPageBackground.png": "/SpotifyComparer/static/media/LandingPageBackground.d49c7a7e30f98b7f335a.png",
-    "index.html": "/SpotifyComparer/index.html",
-    "main.54833e64.css.map": "/SpotifyComparer/static/css/main.54833e64.css.map",
-    "main.d3ddb4d0.js.map": "/SpotifyComparer/static/js/main.d3ddb4d0.js.map"
+    "main.css": "/Harmonize/static/css/main.87b5b253.css",
+    "main.js": "/Harmonize/static/js/main.cd111f28.js",
+    "static/media/LandingPageBackground.png": "/Harmonize/static/media/LandingPageBackground.d49c7a7e30f98b7f335a.png",
+    "index.html": "/Harmonize/index.html",
+    "main.87b5b253.css.map": "/Harmonize/static/css/main.87b5b253.css.map",
+    "main.cd111f28.js.map": "/Harmonize/static/js/main.cd111f28.js.map"
   },
   "entrypoints": [
-    "static/css/main.54833e64.css",
-    "static/js/main.d3ddb4d0.js"
+    "static/css/main.87b5b253.css",
+    "static/js/main.cd111f28.js"
   ]
 }
