@@ -1,7 +1,7 @@
 {
-  "name": "spotifycomparer",
+  "name": "harmonize",
   "version": "0.1.0",
-  "homepage": "https://PhongCao1407.github.io/SpotifyComparer",
+  "homepage": "https://PhongCao1407.github.io/Harmonize",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",

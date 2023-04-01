@@ -16,16 +16,16 @@ function App() {
   const navigator = useNavigate()
 
   const navigateLandingPage = () => {
-    navigator('/SpotifyComparer');
+    navigator('/Harmonize');
   }
 
   const navigateComparisonPage = () => {
     if (token !== "") {
-      navigator('/SpotifyComparer/ComparisonPage')
+      navigator('/Harmonize/ComparisonPage')
     } else {
       let newToken = Spotify.getAccessToken().then
       setToken(newToken)
-      navigator('/SpotifyComparer/ComparisonPage')
+      navigator('/Harmonize/ComparisonPage')
     }
   }
 
@@ -42,13 +42,13 @@ function App() {
   return (
     <div className="App">
       <header>
-        <a onClick={navigateLandingPage}><h2>SPOTIFY <span className='spotify-text'>COMPARE</span></h2></a>
+        <a onClick={navigateLandingPage}><h2><span className='spotify-text'>Harmonize</span></h2></a>
       </header>
 
       <Routes>
-        <Route path='/SpotifyComparer' element={<LandingPage onClick={navigateComparisonPage}/>} />
-        <Route path="/" element={<Navigate replace to="/SpotifyComparer" />} />
-        <Route path='/SpotifyComparer/ComparisonPage' element={<ComparisonPage/>} />
+        <Route path='/Harmonize' element={<LandingPage onClick={navigateComparisonPage}/>} />
+        <Route path="/" element={<Navigate replace to="/Harmonize" />} />
+        <Route path='/Harmonize/ComparisonPage' element={<ComparisonPage/>} />
       </Routes>
 
 
