@@ -1,7 +1,7 @@
 # Harmonize Application
 Overview
 
-Harmonize is a web application that allows users to compare their favorite songs and albums from Spotify. The application fetches data from the Spotify Web API and visualizes it using the Chart.js library.
+Harmonize is a web application that allows users to compare their favorite songs, artists and albums from Spotify. The application fetches data from the Spotify Web API and visualizes it using the Chart.js library.
 
 The application is built using HTML, CSS, JavaScript, and the React Framework. It uses OAuth 2.0 authentication to securely connect to the Spotify Web API.
 
