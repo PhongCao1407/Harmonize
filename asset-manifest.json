@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Harmonize/static/css/main.87b5b253.css",
-    "main.js": "/Harmonize/static/js/main.cd111f28.js",
+    "main.js": "/Harmonize/static/js/main.39c5b522.js",
     "static/media/LandingPageBackground.png": "/Harmonize/static/media/LandingPageBackground.d49c7a7e30f98b7f335a.png",
     "index.html": "/Harmonize/index.html",
     "main.87b5b253.css.map": "/Harmonize/static/css/main.87b5b253.css.map",
-    "main.cd111f28.js.map": "/Harmonize/static/js/main.cd111f28.js.map"
+    "main.39c5b522.js.map": "/Harmonize/static/js/main.39c5b522.js.map"
   },
   "entrypoints": [
     "static/css/main.87b5b253.css",
-    "static/js/main.cd111f28.js"
+    "static/js/main.39c5b522.js"
   ]
 }
