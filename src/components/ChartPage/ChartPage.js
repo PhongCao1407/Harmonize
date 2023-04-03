@@ -96,9 +96,9 @@ function charterRight(acousticness, danceability, energy, instrumentalness, live
                     position: 'right'
                 },
                 //removes the tooltip
-                // tooltip: {
-                //     enabled: false
-                // }
+                tooltip: {
+                    enabled: false
+                }
             },
             scales: {
                 x: {
