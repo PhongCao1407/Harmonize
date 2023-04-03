@@ -34,7 +34,7 @@ function charterLeft(acousticness, danceability, energy, instrumentalness, liven
                     position: 'right'
                 },
                 tooltip: {
-                    
+                    enabled: false
                 }
             },
             scales: {
