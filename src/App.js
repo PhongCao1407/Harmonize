@@ -29,6 +29,10 @@ function App() {
     }
   }
 
+  const logOut = () => {
+    Spotify.logOut()
+    setToken("")
+  }
 
   useEffect(() => {
 
@@ -38,11 +42,20 @@ function App() {
     }
   }, [])
 
+  useEffect(() => {
+    if (token === "") {
+      navigateLandingPage()
+    } else {
+      navigateComparisonPage()
+    }
+  }, [token])
+
 
   return (
     <div className="App">
       <header>
         <a onClick={navigateLandingPage}><h2><span className='spotify-text'>Harmonize</span></h2></a>
+        <button onClick={logOut}>Log Out</button>
       </header>
 
       <Routes>

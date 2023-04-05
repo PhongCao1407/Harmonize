@@ -23,6 +23,8 @@ const Spotify = {
     } else {
       window.location = AUTH_URL;
     }
+  }, logOut() {
+    accessToken = ""
   }, searchTrack(searchTerm) {
     accessToken = Spotify.getAccessToken()
     return fetch(`https://api.spotify.com/v1/search?type=track&q=${searchTerm}`, {
