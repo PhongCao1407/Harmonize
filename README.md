@@ -15,7 +15,7 @@ The Harmonize application has the following features:
 
 ## Credits
 
-The Harmonize application was developed by Phong Cao, Yoshiki Yarlagadda, Zaruf Shams, Jack Pickle as a project for BeachHacks 7.0. The application uses the following libraries and frameworks:
+The Harmonize application was developed by Phong Cao, Yoshiki Yarlagadda, Zarif Shams, Jack Pickle as a project for BeachHacks 7.0. The application uses the following libraries and frameworks:
 
     Chart.js
     React.js
